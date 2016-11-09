@@ -18,10 +18,19 @@ body {
 
 
 #canvascontainer {
+  position: relative;
   margin: auto;
   width: 468px;
   height: 60px;
   background: transparent url('https://cdn.hyperdev.com/dbecfea0-0dc9-41b6-8883-d975dd25172d%2Fcanvasbg.gif');
+}
+
+.canvaslayer {
+  position: absolute ;
+  top: 0;
+  left: 0;
+  cursor: move;
+  border: 1px solid #000;
 }
 
 #lefteditpane {

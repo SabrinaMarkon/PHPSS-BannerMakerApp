@@ -87,6 +87,11 @@ $(function() {
       }
   }).keyup();
   
+      // FONT COLOR:
+  $('#picktextcolor').on('change', function() {
+     $('#picktextcolor').css({ 'background' : this.value, 'color' : idealTextColor(this.value) });
+  });
+  
   // FONT SIZE:
   $('#picktextsize').on('keyup', function() {
       var value = $(this).val();
@@ -97,7 +102,14 @@ $(function() {
       }
   }).keyup();
   
-  
+  // ADD TEXT:
+  $('#textadd').on('click', function() {
+   var font = document.getElementById('texttoadd').value;
+   var fontcolor = document.getElementById('picktextcolor').value;
+   var fontfamily = document.getElementById('picktextfont').value;
+   var fontsize = document.getElementById('picktextsize').value;
+   document.getElementById('canvascontainer').innerHTML += '<div class="canvaslayer" draggable="true" style="color: ' + fontcolor + '; font-family: ' + fontfamily + '; font-size: ' + fontsize + 'px;">' + font + '</div>';
+  });
   
   // SUPPORTING:      
 
