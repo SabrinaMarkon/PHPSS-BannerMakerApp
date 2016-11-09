@@ -56,14 +56,7 @@
                 </div>
                 <div id="collapse2" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Background Color: <select id="pickbgcolor">
-                    <option value="transparent" selected="selected">none</option>
-                    <option value="#000000">Black</option>
-                    <option value="#ffffff">White</option>
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                    </select>
+                    Background Color: <select id="pickbgcolor"></select>
                     <div style="height: 10px;"></div>
                     Background Image: <select id="pickbgimage">
                     </select>
@@ -80,17 +73,22 @@
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
                   <div class="panel-body">
-                    Border Color: <select id="pickbgcolor">
-                    <option value="transparent" selected="selected">none</option>
-                    <option value="#000000">Black</option>
-                    <option value="#ffffff">White</option>
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                    </select>
+                    Border Color: <select id="pickbordercolor"></select>
                     <div style="height: 10px;"></div>
-
-        
+                    Border Width: <input type="number" id="pickborderwidth" value="14"><span id="borderwidtherror">
+                    <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 0 and 20</span></span>
+                    <div style="height: 10px;"></div>
+                    Border Style: <select id="pickborderstyle">
+                      <option value="none" selected="selected">None</option>
+                      <option value="solid">solid</option>
+                      <option value="dotted">dotted</option>
+                      <option value="dashed">dashed</option>
+                      <option value="double">double</option>
+                      <option value="groove">groove</option>
+                      <option value="ridge">ridge</option>
+                      <option value="inset">inset</option>
+                      <option value="outset">outset</option>
+                  </select>
                   </div>
                 </div>
               </div>
@@ -104,6 +102,9 @@
                 <div id="collapse4" class="panel-collapse collapse">
                   <div class="panel-body">
                     Text to Add: <input type="text" id="texttoadd" size="25">
+                    <div style="height: 10px;"></div>
+                    Font Color: <select id="picktextcolor"></select>
+                    <div style="height: 10px;"></div>
                     Font: <select id="picktextfont">
                       <option value="Arial" style="font-family: Arial;" selected="selected">Arial</option>
                       <option value="Arial Black" style="font-family: Arial Black;">Arial Black</option>
@@ -137,6 +138,14 @@
                       <option value="Ubuntu" style="font-family: Ubuntu;">Ubuntu</option>
                       <option value="Verdana" style="font-family: Verdana;">Verdana</option>
                     </select>
+                    <div style="height: 10px;"></div>
+                    Font Size: <input type="number" id="picktextsize" value="14"><span id="textsizeerror">
+                    <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 1 and 300</span></span>
+                    <div style="height: 10px;"></div>
+                    <button id="bold" class="unbold"><strong>B</strong></button>
+                    <button id="italic"><em>I</em></button>
+                    <button id="underline"><u>U</u></button>
+                    <button id="textadd">ADD</button>
                   </div>
                 </div>
               
