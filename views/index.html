@@ -1,0 +1,189 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: http://mozilla.github.io/nunjucks/ -->
+<!-- jade: http://jade-lang.com/ -->
+<!-- haml: http://haml.info/tutorial.html -->
+<!-- hbs(handlebars): http://handlebarsjs.com/expressions.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to HyperDev!</title>
+    <meta name="description" content="A cool thing made with HyperDev">
+    <link id="favicon" rel="icon" href="https://hyperdev.com/favicon-app.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Roboto:300|Tangerine|League+Gothic|Cabin|Corbel|Bebas+Neue|Ubuntu|Lobster|Franchise|PT+Serif" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+    </header>
+
+    <main>
+      <div class="container-fluid">
+        <div class="row no-gutter">
+          <div id="lefteditpane" class="col-sm-4">
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">
+                    Dimensions</a>
+                  </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Banner Width: <input type="number" id="bannerwidth" value="600"><span id="bannerwidtherror">
+                    <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 1 and 1000</span></span>
+                    <div style="height: 10px;"></div>
+                    Banner Height: <input type="number" id="bannerheight" value="300"><span id="bannerheighterror">
+                    <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 1 and 1000</span></span>
+                  </div>
+                </div>
+              </div>  
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse2">
+                    Background</a>
+                  </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Background Color: <select id="pickbgcolor"></select>
+                    <div style="height: 10px;"></div>
+                    Background Image: <select id="pickbgimage">
+                    </select>
+        
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse3">
+                    Border</a>
+                  </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Border Color: <select id="pickbordercolor"></select>
+                    <div style="height: 10px;"></div>
+                    Border Width: <input type="number" id="pickborderwidth" value="14"><span id="borderwidtherror">
+                    <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 0 and 20</span></span>
+                    <div style="height: 10px;"></div>
+                    Border Style: <select id="pickborderstyle">
+                      <option value="none" selected="selected">None</option>
+                      <option value="solid">solid</option>
+                      <option value="dotted">dotted</option>
+                      <option value="dashed">dashed</option>
+                      <option value="double">double</option>
+                      <option value="groove">groove</option>
+                      <option value="ridge">ridge</option>
+                      <option value="inset">inset</option>
+                      <option value="outset">outset</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse4">
+                    Add Text</a>
+                  </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Text to Add: <input type="text" id="texttoadd" size="25">
+                    <div style="height: 10px;"></div>
+                    Font Color: <select id="picktextcolor"></select>
+                    <div style="height: 10px;"></div>
+                    Font: <select id="picktextfont">
+                      <option value="Arial" style="font-family: Arial;" selected="selected">Arial</option>
+                      <option value="Arial Black" style="font-family: Arial Black;">Arial Black</option>
+                      <option value="Arial Narrow" style="font-family: Arial Narrow;">Arial Narrow</option>
+                      <option value="Bebas Neue" style="font-family: Bebas Neue;">Bebas Neue</option>
+                      <option value="Cabin" style="font-family: Cabin;">Cabin</option>
+                      <option value="Century Gothic" style="font-family: Century Gothic;">Century Gothic</option>
+                      <option value="Copperplate Gothic Light" style="font-family: Copperplate Gothic Light;">Copperplate / Copperplate Gothic Light</option>
+                      <option value="Corbel" style="font-family: Corbel;">Corbel</option>
+                      <option value="Courier New" style="font-family: Courier New;">Courier New</option>
+                      <option value="Franchise" style="font-family: Franchise;">Franchise</option>
+                      <option value="Georgia" style="font-family: Georgia;">Georgia</option>
+                      <option value="Gill Sans" style="font-family: Gill Sans;">Gill Sans / Gill Sans MT</option>
+                      <option value="Helvetica" style="font-family: Helvetica;">Helvetica</option>
+                      <option value="Impact" style="font-family: Impact;">Impact</option>
+                      <option value="League Gothic" style="font-family: League Gothic;">League Gothic</option>
+                      <option value="Lobster" style="font-family: Lobster;">Lobster</option>
+                      <option value="Lucida Console" style="font-family: Lucida Console;">Lucida Console</option>
+                      <option value="Lucida Sans Unicode" style="font-family: Lucida Sans Unicode;">Lucida Sans Unicode</option>
+                      <option value="Luckiest Guy" style="font-family: Luckiest Guy;">Luckiest Guy</option>
+                      <option value="Museo Slab" style="font-family: Museo Slab;">Museo Slab</option>
+                      <option value="Myriad Pro" style="font-family: Myriad Pro;">Myriad Pro</option>
+                      <option value="Palatino Italic" style="font-family: Palatino Italic;">Palatino Italic</option>
+                      <option value="Palatino Linotype" style="font-family: Palatino Linotype;">Palatino Linotype</option>
+                      <option value="PT Serif" style="font-family: PT Serif;">PT Serif</option>
+                      <option value="Roboto" style="font-family: Roboto;">Roboto</option>
+                      <option value="Tahoma" style="font-family: Tahoma;">Tahoma</option>
+                      <option value="Tangerine" style="font-family: Tangerine;">Tangerine</option>
+                      <option value="Times New Roman" style="font-family: Times New Roman;">Times New Roman</option>
+                      <option value="Trebuchet MS" style="font-family: Trebuchet MS;">Trebuchet MS</option>
+                      <option value="Ubuntu" style="font-family: Ubuntu;">Ubuntu</option>
+                      <option value="Verdana" style="font-family: Verdana;">Verdana</option>
+                    </select>
+                    <div style="height: 10px;"></div>
+                    Font Size: <input type="number" id="picktextsize" value="14"><span id="textsizeerror">
+                    <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 1 and 300</span></span>
+                    <div style="height: 10px;"></div>
+                    <button id="bold" class="unbold"><strong>B</strong></button>
+                    <button id="italic"><em>I</em></button>
+                    <button id="underline"><u>U</u></button>
+                    <button id="textadd">ADD TEXT</button>
+                  </div>
+                </div>
+              
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse5">
+                    Images</a>
+                  </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse">
+                  <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                  minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  commodo consequat.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="maineditpane" class="col-sm-8">
+            <p>
+              <div id="canvascontainer"></div>
+            </p>
+          </div>
+        </div>
+      </div>  
+    </main>
+
+    <footer>
+    </footer>
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+
+  </body>
+</html>
