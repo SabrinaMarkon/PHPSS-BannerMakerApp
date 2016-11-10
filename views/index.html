@@ -201,7 +201,7 @@ Upload Image: <input type="file" style="display: none;">
           </div>
           <div id="maineditpane" class="col-sm-8">
             <p>
-              <div id="canvascontainer" ondragenter="return false;" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
+              <div id="canvascontainer" ondrop="return drop(event)" ondragover="allowDrop(event)"></div>
               <!-- <div id="canvascontainer" class="canvascontainer"></div> -->
             </p>
           </div>
@@ -214,25 +214,29 @@ Upload Image: <input type="file" style="display: none;">
 
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script>
     // BASIC DRAG AND DROP:
-    function allowDrop(ev) {
+function allowDrop(ev){
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.innerHTML);
+//alert(ev.target.innerHTML);
+}
+
+function drop(ev)
+{
     ev.preventDefault();
-    }
-    
-    function drag(ev, target) {
-        ev.dataTransfer.setData('text/html', ev.target.id);
-    }
-    
-    function drop(ev, target) {
-        ev.preventDefault();
-        console.log(target.id, ev.target.id)
-    
-        var data = ev.dataTransfer.getData("text/html");
-        //alert(target.innerHTML);
-    }
+    //console.log(ev.dataTransfer);
+    var data = ev.dataTransfer.getData("Text");
+    //ev.target.appendChild(document.getElementById(data));
+    ev.target.innerHTML += data;
+    alert(data);
+} 
     </script>
     <script src="/client.js"></script>
   </body>

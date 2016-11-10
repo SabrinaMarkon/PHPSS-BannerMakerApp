@@ -135,8 +135,10 @@ $(function() {
     lastid = 0;
   }
   var newid = lastid + 1;
-  document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer" draggable="true" ondragstart="drag(event, this)" style="' + textstyle + '">' + font + '</div>';
+ // document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer" draggable="true" ondragstart="drag(event, this)" style="' + textstyle + '">' + font + '</div>';
   
+  document.getElementById('canvascontainer').innerHTML += '<div draggable="true" ondragstart="drag(event)"><div id="' + newid + '" class="canvaslayer" style="' + textstyle + '">' + font + '</div></div>';
+ 
   });
   
   // TEXT BOLD:
@@ -172,7 +174,8 @@ $(function() {
         lastid = 0;
       }
       var newid = lastid + 1;
-      document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer picture" draggable="true" ondragstart="drag(event, this)"><img src="' + pickimage + '" style="' + imgstyle + '"></div>';
+      
+      document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer picture" draggable="true" ondragstart="drag(event)"><img height=100 width=100 src="' + pickimage + '" style="' + imgstyle + '"></div>';
  
    }
   });
