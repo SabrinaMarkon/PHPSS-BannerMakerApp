@@ -6,29 +6,20 @@
 
 $(function() {
   
-  console.log('hello world :o');
+  //console.log('hello world :o');
   
-    
   $.get('/dreams', function(dreams) {
     dreams.forEach(function(dream) {
       $('<li></li>').text(dream).appendTo('ul#dreams');
     });
   });
 
-  $('form').submit(function(event) {
-    event.preventDefault();
-    dream = $('input').val();
-    $.post('/dreams?' + $.param({dream: dream}), function() {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-      $('input').val('');
-      $('input').focus();
-    });
-  });
+
   
   // IMAGE EDITING:
   
   // BANNER WIDTH: // PROBLEM STILL - text added shows outside if banner is smaller.
-  $('#bannerwidth').on('keyup', function() {
+  $('#bannerwidth').on('keyup mouseup', function() {
       var value = $(this).val();
        if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 1001 && value != null)) {
           $('#bannerwidtherror').css({'visibility' : 'hidden', 'display' : 'none'});
@@ -40,7 +31,7 @@ $(function() {
   }).keyup();
 
   // BANNER HEIGHT:
-  $('#bannerheight').on('keyup', function() {
+  $('#bannerheight').on('keyup mouseup', function() {
       var value = $(this).val();
       if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 1001 && value != null)) {
           $('#bannerheighterror').css({'visibility' : 'hidden', 'display' : 'none'});
@@ -63,8 +54,13 @@ $(function() {
   });
   
   // BACKGROUND IMAGE:
-  //
-  //
+  $('#pickbgimage').on('change', function() {
+     if (this.value === 'none') {
+       $('#canvascontainer').css({ 'background' : '' });  
+     } else {
+       $('#canvascontainer').css({ 'background' : 'url("' + this.value + '")', 'background-size' : '100% 100%' });
+     }
+  });
 
     // BORDER COLOR:
   $('#pickbordercolor').on('change', function() {
@@ -77,8 +73,8 @@ $(function() {
      }
   });
   
-  // BORDER WIDTH: UH OH "number" field is not just keyup!!!!
-    $('#pickborderwidth').on('keyup mouseup', function() {
+  // BORDER WIDTH:
+    $('#pickborderwidth').on('keyup mouseup', function() { // works with both keyboard entry or the number field's up/down arrows.
       var value = $(this).val();
       if ($.isNumeric(value) && Math.floor(value) == +value && (value > -1 && value < 21 && value != null)) {
           $('#borderwidtherror').css({'visibility' : 'hidden', 'display' : 'none'});
@@ -100,13 +96,18 @@ $(function() {
     }
   });
   
+  // DELETE BORDER:
+  $('#borderdelete').on('click', function() {
+    $('#canvascontainer').css({ 'border' : '0 transparent' });
+  });
+  
       // FONT COLOR:
   $('#picktextcolor').on('change', function() {
      $('#picktextcolor').css({ 'background' : this.value, 'color' : idealTextColor(this.value) });
   });
   
   // FONT SIZE:
-  $('#picktextsize').on('keyup', function() {
+  $('#picktextsize').on('keyup mouseup', function() {
       var value = $(this).val();
       if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 301 && value != null)) {
           $('#textsizeerror').css({'visibility' : 'hidden', 'display' : 'none'});
@@ -114,7 +115,6 @@ $(function() {
           $('#textsizeerror').css({'visibility' : 'visible', 'display' : 'block'});
       }
   }).keyup();
-
 
 
   // ADD TEXT:
@@ -161,6 +161,22 @@ $(function() {
       }
   });
   
+  // ADD IMAGE:
+  $('#imageadd').on('click', function() {
+   var pickimage = document.getElementById('pickimage').value;
+   if (pickimage !== 'none') {
+      var canvascontainer = document.getElementById("canvascontainer");
+      var imgstyle = "max-width: 90%; max-height: 90%;";
+      var lastid = parseInt($('#canvascontainer div').last().attr('id'));
+      if (!lastid) {
+        lastid = 0;
+      }
+      var newid = lastid + 1;
+      document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer picture" draggable="true" ondragstart="drag(event, this)"><img src="' + pickimage + '" style="' + imgstyle + '"></div>';
+ 
+   }
+  });
+  
   // UNDO ONE BY ONE:
   $('#undo').on('click', function() {
     if ($('#canvascontainer').find('.canvaslayer').length) {
@@ -173,6 +189,7 @@ $(function() {
       //$('#previewImage').empty();
       //$('#textcount').empty();
       document.getElementById('canvascontainer').innerHTML = '';
+      $('#canvascontainer').css({ 'border' : '0 transparent', 'background' : '' });
       //canvasnumber = 2;
   });
         

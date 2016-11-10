@@ -66,6 +66,9 @@
                     Background Color: <select id="pickbgcolor"></select>
                     <div style="height: 10px;"></div>
                     Background Image: <select id="pickbgimage">
+                      <option value="none">None</option>
+                      <option value="https://cdn.hyperdev.com/f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg">
+                       f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg</option>
                     </select>
         
                   </div>
@@ -97,7 +100,7 @@
                       <option value="outset">outset</option>
                   </select>
                   <div style="height: 10px;"></div>
-                  <button id="borderadd">ADD BORDER</button>
+                  <button id="borderadd">ADD BORDER</button>&nbsp;<button id="borderdelete">CLEAR</button>
                   </div>
                 </div>
               </div>
@@ -178,11 +181,19 @@
                 <div id="collapse5" class="panel-collapse collapse">
                   <div class="panel-body">
                   Select Image: <select id="pickimage">
+                      <option value="none">None</option>
+                      <option value="https://cdn.hyperdev.com/f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg">
+                       f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg</option>
                     </select>
-                  <div style="height: 10px;"></div>
+                    <div style="height: 10px;"></div>
+                    <button id="imageadd">ADD IMAGE</button>           
                   
-                  <label class="control-label">Select File</label>
-                  <input id="input-21" type="file" accept="image/*" class="file-loading">
+<!-- 
+<div style="height: 10px;"></div>
+<label class="btn btn-default btn-file">
+Upload Image: <input type="file" style="display: none;">
+</label> UPLOAD FUNCTIONALITY AFTER -->
+                  
                   </div>
                 </div>
               </div>
@@ -202,8 +213,8 @@
     </footer>
 
     <!-- Your web-app is https, so your scripts need to be too -->
-<script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script>
     // BASIC DRAG AND DROP:
