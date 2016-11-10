@@ -12,10 +12,16 @@ body {
   font-family: helvetica, arial, sans-serif;
 }
 
-.drag {
-  position: relative;
-}
 
+.bold {
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+.underline {
+    text-decoration: underline;
+}
 
 #canvascontainer {
   position: relative;
@@ -25,8 +31,8 @@ body {
   background: transparent url('https://cdn.hyperdev.com/dbecfea0-0dc9-41b6-8883-d975dd25172d%2Fcanvasbg.gif');
 }
 
-.canvaslayer {
-  position: absolute ;
+ .canvaslayer {
+  position: absolute;
   top: 0;
   left: 0;
   cursor: move;
@@ -41,6 +47,10 @@ body {
     left: 0;
     width: 250px;
 }
+ 
+.checkbox-last {
+  padding-bottom: 20px;
+} 
 
 #maineditpane {
   background-color: #E2F4BE;
