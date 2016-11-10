@@ -29,6 +29,13 @@
       <div class="container-fluid">
         <div class="row no-gutter">
           <div id="lefteditpane" class="col-sm-4">
+            <div style="height: 10px;"></div>
+            <div class="controlbuttons text-center">
+              <button id="undo">UNDO</button>
+              <button id="clear">CLEAR ALL</button>
+              <button id="btn-Convert-Html2Image">SAVE</button>
+            </div>
+            <div style="height: 10px;"></div>
             <div class="panel-group" id="accordion">
               <div class="panel panel-default">
                 <div class="panel-heading">
@@ -89,6 +96,8 @@
                       <option value="inset">inset</option>
                       <option value="outset">outset</option>
                   </select>
+                  <div style="height: 10px;"></div>
+                  <button id="borderadd">ADD BORDER</button>
                   </div>
                 </div>
               </div>
@@ -142,9 +151,18 @@
                     Font Size: <input type="number" id="picktextsize" value="14"><span id="textsizeerror">
                     <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 1 and 300</span></span>
                     <div style="height: 10px;"></div>
-                    <button id="bold" class="unbold"><strong>B</strong></button>
-                    <button id="italic"><em>I</em></button>
-                    <button id="underline"><u>U</u></button>
+                    	<div class="col-sm-12">
+                    		<div class="checkbox">
+                    			<label><input id="bold" type="checkbox"><strong>Bold</strong></label>
+                    		</div>
+                    		<div class="checkbox">
+                    		<label><input id="italic" type="checkbox"><em>Italic</em></label>
+                    		</div> 
+                    		<div class="checkbox checkbox-last">
+                    		<label><input id="underline" type="checkbox"><u>Underline</u></label>
+                    		</div> 
+                    	</div>
+                    <div style="height: 10px;"></div>
                     <button id="textadd">ADD TEXT</button>
                   </div>
                 </div>
@@ -158,17 +176,22 @@
                   </h4>
                 </div>
                 <div id="collapse5" class="panel-collapse collapse">
-                  <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                  minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo consequat.</div>
+                  <div class="panel-body">
+                  Select Image: <select id="pickimage">
+                    </select>
+                  <div style="height: 10px;"></div>
+                  
+                  <label class="control-label">Select File</label>
+                  <input id="input-21" type="file" accept="image/*" class="file-loading">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div id="maineditpane" class="col-sm-8">
             <p>
-              <div id="canvascontainer"></div>
+              <div id="canvascontainer" ondragenter="return false;" ondragover="allowDrop(event)" ondrop="drop(event, this)"></div>
+              <!-- <div id="canvascontainer" class="canvascontainer"></div> -->
             </p>
           </div>
         </div>
@@ -179,11 +202,27 @@
     </footer>
 
     <!-- Your web-app is https, so your scripts need to be too -->
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
-            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
+    // BASIC DRAG AND DROP:
+    function allowDrop(ev) {
+    ev.preventDefault();
+    }
+    
+    function drag(ev, target) {
+        ev.dataTransfer.setData('text/html', ev.target.id);
+    }
+    
+    function drop(ev, target) {
+        ev.preventDefault();
+        console.log(target.id, ev.target.id)
+    
+        var data = ev.dataTransfer.getData("text/html");
+        //alert(target.innerHTML);
+    }
+    </script>
     <script src="/client.js"></script>
-
   </body>
 </html>

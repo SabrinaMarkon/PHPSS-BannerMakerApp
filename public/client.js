@@ -5,8 +5,10 @@
 // add other scripts at the bottom of index.html
 
 $(function() {
+  
   console.log('hello world :o');
   
+    
   $.get('/dreams', function(dreams) {
     dreams.forEach(function(dream) {
       $('<li></li>').text(dream).appendTo('ul#dreams');
@@ -22,7 +24,7 @@ $(function() {
       $('input').focus();
     });
   });
-
+  
   // IMAGE EDITING:
   
   // BANNER WIDTH: // PROBLEM STILL - text added shows outside if banner is smaller.
@@ -63,17 +65,15 @@ $(function() {
   // BACKGROUND IMAGE:
   //
   //
-  
+
     // BORDER COLOR:
   $('#pickbordercolor').on('change', function() {
     var pickborderwidth = document.getElementById('pickborderwidth').value;
     var pickborderstyle = document.getElementById('pickborderstyle').value;
      if (this.value === 'transparent') {
        $('#pickbordercolor').css({ 'background' : 'transparent', 'color' : '' });  
-       $('#canvascontainer').css({ 'border' : '0 transparent' });  
      } else {
        $('#pickbordercolor').css({ 'background' : this.value, 'color' : idealTextColor(this.value) });
-       $('#canvascontainer').css( { 'border' : pickborderwidth + 'px ' + pickborderstyle + ' ' + this.value });
      }
   });
   
@@ -86,6 +86,19 @@ $(function() {
           $('#borderwidtherror').css({'visibility' : 'visible', 'display' : 'block'});
       }
   }).keyup();
+  
+  // ADD BORDER:
+  
+  $('#borderadd').on('click', function() {
+    var pickbordercolor = document.getElementById('pickbordercolor').value;
+    var pickborderwidth = document.getElementById('pickborderwidth').value;
+    var pickborderstyle = document.getElementById('pickborderstyle').value;
+    if (pickbordercolor === 'transparent' || pickborderwidth < 1 || pickborderstyle === 'none') {
+      $('#canvascontainer').css({ 'border' : '0 transparent' });  
+    } else {
+    $('#canvascontainer').css( { 'border' : pickborderwidth + 'px ' + pickborderstyle + ' ' + pickbordercolor });
+    }
+  });
   
       // FONT COLOR:
   $('#picktextcolor').on('change', function() {
@@ -101,17 +114,69 @@ $(function() {
           $('#textsizeerror').css({'visibility' : 'visible', 'display' : 'block'});
       }
   }).keyup();
-  
+
+
+
   // ADD TEXT:
   $('#textadd').on('click', function() {
    var font = document.getElementById('texttoadd').value;
    var fontcolor = document.getElementById('picktextcolor').value;
    var fontfamily = document.getElementById('picktextfont').value;
    var fontsize = document.getElementById('picktextsize').value;
-   document.getElementById('canvascontainer').innerHTML += '<div class="canvaslayer" draggable="true" style="color: ' + fontcolor + '; font-family: ' + fontfamily + '; font-size: ' + fontsize + 'px;">' + font + '</div>';
+   var lastid = parseInt($('#canvascontainer div').last().attr('id'));
+   var bold = document.getElementById('bold').checked;
+   var italic = document.getElementById('italic').checked;
+   var underline = document.getElementById('underline').checked;
+   var textstyle = "color: " + fontcolor + "; font-family: " + fontfamily + "; font-size: " + fontsize + "px;";
+   if (bold) { textstyle += " font-weight: bold;"; } else { textstyle += " font-weight: normal;"; }
+   if (italic) { textstyle += " font-style: italic;"; } else { textstyle += " font-style: normal;"; }
+   if (underline) { textstyle += " text-decoration: underline;"; } else { textstyle += " text-decoration: none;"; }
+  if (!lastid) {
+    lastid = 0;
+  }
+  var newid = lastid + 1;
+  document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer" draggable="true" ondragstart="drag(event, this)" style="' + textstyle + '">' + font + '</div>';
+  
   });
   
-  // SUPPORTING:      
+  // TEXT BOLD:
+  $('#bold').click(function(){
+      $('#texttoadd').toggleClass('bold');
+      $("#textcount").toggleClass('bold');
+      if($('#textcount').hasClass('bold')) {
+          $('#textcount').css('font-weight', 'bold');
+      } else {
+          $('#textcount').css('font-weight', 'normal');
+      }
+  });
+
+  // TEXT ITALIC:
+  $('#italic').click(function(){
+      $('#texttoadd').toggleClass('italic');
+      $("#textcount").toggleClass('italic');
+      if($('#textcount').hasClass('italic')) {
+          $('#textcount').css('font-style', 'italic');
+      } else {
+          $('#textcount').css('font-style', 'normal');
+      }
+  });
+  
+  // UNDO ONE BY ONE:
+  $('#undo').on('click', function() {
+    if ($('#canvascontainer').find('.canvaslayer').length) {
+      canvascontainer.removeChild(canvascontainer.lastChild);
+    } 
+  });
+
+  // UNDO ALL:
+  $('#clear').on('click', function() {
+      //$('#previewImage').empty();
+      //$('#textcount').empty();
+      document.getElementById('canvascontainer').innerHTML = '';
+      //canvasnumber = 2;
+  });
+        
+  // SUPPORTING FUNCTIONS: 
 
   function idealTextColor(bgColor) {
   
