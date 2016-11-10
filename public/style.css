@@ -39,6 +39,10 @@ body {
   border: 1px solid #000;
 }
 
+.picture {
+  border: 0;
+}
+
 #lefteditpane {
     background-color: #FFC125;
     padding: 0;
@@ -87,7 +91,7 @@ input, select {
   font-size: 16px;
 }
 
-button {
+button, .btn-file {
   font-size: 16px;
   border-radius: 3px;
   background-color: lightgrey;
@@ -98,6 +102,10 @@ button {
 
 button:hover {
   background-color: yellow;
+}
+
+.btn-file:hover {
+  background: yellow;
 }
 
 button:active {
