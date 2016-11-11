@@ -20,11 +20,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
   </head>
   <body>
     <header>
     </header>
-
+    
     <main>
       <div class="container-fluid">
         <div class="row no-gutter">
@@ -33,7 +34,7 @@
             <div class="controlbuttons text-center">
               <button id="undo">UNDO</button>
               <button id="clear">CLEAR ALL</button>
-              <button id="btn-Convert-Html2Image">SAVE</button>
+              <button id="save">SAVE</button>
             </div>
             <div style="height: 10px;"></div>
             <div class="panel-group" id="accordion">
@@ -151,7 +152,7 @@
                       <option value="Verdana" style="font-family: Verdana;">Verdana</option>
                     </select>
                     <div style="height: 10px;"></div>
-                    Font Size: <input type="number" id="picktextsize" value="14"><span id="textsizeerror">
+                    Font Size: <input type="number" id="picktextsize" value="40"><span id="textsizeerror">
                     <span class="glyphicon glyphicon-exclamation-sign has-error" aria-hidden="true"></span><span class="has-error">Please enter an integer between 1 and 300</span></span>
                     <div style="height: 10px;"></div>
                     	<div class="col-sm-12">
@@ -201,8 +202,9 @@ Upload Image: <input type="file" style="display: none;">
           </div>
           <div id="maineditpane" class="col-sm-8">
             <p>
-              <div id="canvascontainer" ondrop="return drop(event)" ondragover="allowDrop(event)"></div>
-              <!-- <div id="canvascontainer" class="canvascontainer"></div> -->
+              <div id="canvascontainer">
+      
+              </div>
             </p>
           </div>
         </div>
@@ -214,30 +216,9 @@ Upload Image: <input type="file" style="display: none;">
 
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
-    <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+     <!--    <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script>
-    // BASIC DRAG AND DROP:
-function allowDrop(ev){
-ev.preventDefault();
-}
-
-function drag(ev)
-{
-ev.dataTransfer.setData("Text",ev.target.innerHTML);
-//alert(ev.target.innerHTML);
-}
-
-function drop(ev)
-{
-    ev.preventDefault();
-    //console.log(ev.dataTransfer);
-    var data = ev.dataTransfer.getData("Text");
-    //ev.target.appendChild(document.getElementById(data));
-    ev.target.innerHTML += data;
-    alert(data);
-} 
-    </script>
     <script src="/client.js"></script>
   </body>
 </html>
