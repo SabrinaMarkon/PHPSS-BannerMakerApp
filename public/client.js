@@ -109,7 +109,7 @@ $(function() {
   // FONT SIZE:
   $('#picktextsize').on('keyup mouseup', function() {
       var value = $(this).val();
-      if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 301 && value != null)) {
+      if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 301 && value !== null)) {
           $('#textsizeerror').css({'visibility' : 'hidden', 'display' : 'none'});
       } else {
           $('#textsizeerror').css({'visibility' : 'visible', 'display' : 'block'});
@@ -119,7 +119,7 @@ $(function() {
 
   // ADD TEXT:
   $('#textadd').on('click', function() {
-   var font = document.getElementById('texttoadd').value;
+   var text = document.getElementById('texttoadd').value;
    var fontcolor = document.getElementById('picktextcolor').value;
    var fontfamily = document.getElementById('picktextfont').value;
    var fontsize = document.getElementById('picktextsize').value;
@@ -127,7 +127,7 @@ $(function() {
    var bold = document.getElementById('bold').checked;
    var italic = document.getElementById('italic').checked;
    var underline = document.getElementById('underline').checked;
-   var textstyle = "color: " + fontcolor + "; font-family: " + fontfamily + "; font-size: " + fontsize + "px;";
+   var textstyle = "color: " + fontcolor + "; font-family: " + fontfamily + "; font-size: " + fontsize + "px; background: none; border: 0px;";
    if (bold) { textstyle += " font-weight: bold;"; } else { textstyle += " font-weight: normal;"; }
    if (italic) { textstyle += " font-style: italic;"; } else { textstyle += " font-style: normal;"; }
    if (underline) { textstyle += " text-decoration: underline;"; } else { textstyle += " text-decoration: none;"; }
@@ -135,10 +135,22 @@ $(function() {
     lastid = 0;
   }
   var newid = lastid + 1;
-  document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer" draggable="true" ondragstart="drag(event, this)" style="' + textstyle + '">' + font + '</div>';
-  
+  $('#canvascontainer').append($('<div id="' + newid + '"  class="ui-widget-content canvaslayer" style="' + textstyle + '">' + text + '</div>')
+      .draggable({ containment : "#canvascontainer" })
+      .resizable({ 
+        containment: "#canvascontainer", 
+        aspectRatio: false,
+        resize : function(event, ui) {
+        // handle fontsize here
+        //console.log(ui.size); // gives you the current size of the div
+        var size = ui.size;
+        // something like this change the values according to your requirements
+        $(this).css("font-size", (size.width * size.height)/1000 + "px"); 
+        } 
+    }));
   });
-  
+
+    
   // TEXT BOLD:
   $('#bold').click(function(){
       $('#texttoadd').toggleClass('bold');
@@ -166,14 +178,19 @@ $(function() {
    var pickimage = document.getElementById('pickimage').value;
    if (pickimage !== 'none') {
       var canvascontainer = document.getElementById("canvascontainer");
-      var imgstyle = "max-width: 90%; max-height: 90%;";
+      var imgstyle = "max-width: 90%; max-height: 90%; background: none;";
       var lastid = parseInt($('#canvascontainer div').last().attr('id'));
       if (!lastid) {
         lastid = 0;
       }
       var newid = lastid + 1;
-      document.getElementById('canvascontainer').innerHTML += '<div id="' + newid + '"  class="canvaslayer picture" draggable="true" ondragstart="drag(event, this)"><img src="' + pickimage + '" style="' + imgstyle + '"></div>';
- 
+    $('#canvascontainer').append($('<div id="' + newid + '" class="canvaslayer picture"><img class="ui-widget-content" src="' + pickimage + '" style="' + imgstyle + '"></div>')
+        .draggable({ containment : "#canvascontainer" })
+        .resizable({ 
+          containment : "#canvascontainer",
+          aspectRatio: false
+        })
+      );
    }
   });
   
@@ -195,6 +212,8 @@ $(function() {
         
   // SUPPORTING FUNCTIONS: 
 
+
+  // GET CONTRASTING TEXT COLOR FOR BACKGROUNDS:
   function idealTextColor(bgColor) {
   
      var nThreshold = 105;
@@ -217,7 +236,7 @@ $(function() {
     };
 }
 
-  // color picker
+  // COLORS
   var colorNames = [ 
   "Black", "White", "Radical Red", "Wild Watermelon", "Outrageous Orange", "Atomic Tangerine", "Neon Carrot", "Sunglow", 
   "Laser Lemon", "Unmellow Yellow", "Electric Lime", "Screamin' Green", "Magic Mint", "Blizzard Blue", "Shocking Pink", 
