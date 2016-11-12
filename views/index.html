@@ -234,14 +234,19 @@ Upload Image: <input type="file" style="display: none;">
             </div>
           </div>
           <div id="maineditpane" class="col-sm-8">
-            <p>
               <div id="canvascontainer">
       
               </div>
               <div id="savediv">
                 
               </div>
-            </p>
+              <div id="downloadbuttondiv">
+                <form method="post" enctype="multipart/form-data" action="imagedownload.php" id="downloadform">
+                <input type="hidden" name="img_val" id="img_val" value="">
+                <button id="downloadbutton">DOWNLOAD</button>
+                </form>
+              </div>
+              <div style="height: 20px;"></div>
           </div>
         </div>
       </div>  

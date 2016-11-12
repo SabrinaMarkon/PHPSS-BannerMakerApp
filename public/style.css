@@ -27,6 +27,7 @@ body {
 #canvascontainer {
   position: relative;
   margin: auto;
+  margin-top: 20px;
   width: 468px;
   height: 60px;
   background: transparent url('https://cdn.hyperdev.com/dbecfea0-0dc9-41b6-8883-d975dd25172d%2Fcanvasbg.gif');
@@ -36,7 +37,7 @@ body {
   position: relative;
   margin: auto;
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -71,6 +72,12 @@ body {
   text-align: center;
   max-width: 200px;
   max-height: 200px;
+}
+
+#downloadbuttondiv {
+  display: none;
+  text-align: center;
+  padding: 0;
 }
 
 .checkbox-last {
@@ -120,16 +127,6 @@ body {
 .ui-icon {
     width: 9px !important;
     height: 9px !important;
-}
-
-form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: cyan;
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 3px;
 }
 
 input, select {
