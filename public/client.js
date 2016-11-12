@@ -131,7 +131,6 @@ $(function() {
    var fontcolor = document.getElementById('picktextcolor').value;
    var fontfamily = document.getElementById('picktextfont').value;
    var fontsize = document.getElementById('picktextsize').value;
-   var lastid = parseInt($('#canvascontainer div').last().attr('id'));
    var bold = document.getElementById('bold').checked;
    var italic = document.getElementById('italic').checked;
    var underline = document.getElementById('underline').checked;
@@ -139,10 +138,8 @@ $(function() {
    if (bold) { textstyle += " font-weight: bold;"; } else { textstyle += " font-weight: normal;"; }
    if (italic) { textstyle += " font-style: italic;"; } else { textstyle += " font-style: normal;"; }
    if (underline) { textstyle += " text-decoration: underline;"; } else { textstyle += " text-decoration: none;"; }
-  if (!lastid) {
-    lastid = 0;
-  }
-  var newid = lastid + 1;
+  
+  var newid = $("#canvascontainer > div").length + 1;
   
   // RESIZABLE TEXT (commented out because between this and the images, there are too many resize handles and font size can be specified beforehand)
   // $('#canvascontainer').append($('<div id="' + newid + '"  class="ui-widget-content canvaslayer" style="' + textstyle + '">' + text + '</div>')
@@ -203,11 +200,7 @@ $(function() {
    if (pickimage !== 'none') {
       var canvascontainer = document.getElementById("canvascontainer");
       var imgstyle = "max-width: 100%; max-height: 100%; background: none;";
-      var lastid = parseInt($('#canvascontainer div').last().attr('id'));
-      if (!lastid) {
-        lastid = 0;
-      }
-      var newid = lastid + 1;
+      var newid = $("#canvascontainer > div").length + 1;
     $('#canvascontainer').append($('<div id="' + newid + '" class="canvaslayer picture"><img class="ui-widget-content" src="' + pickimage + '" style="' + imgstyle + '"></div>')
         .draggable({ containment : "body" })
         .resizable({ 
@@ -270,12 +263,6 @@ $(function() {
                 theCanvas = canvas;
                 $('#savediv').append('<h3>Your Image:</h3>')
                 $('#savediv').append(canvas);
-
-                // Convert and download as image 
-                // Canvas2Image.saveAsPNG(canvas); 
-                // $("#img-out").append(canvas);
-                // Clean up 
-                //document.body.removeChild(canvas);
             }
         });
     });
