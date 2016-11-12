@@ -14,14 +14,11 @@ $(function() {
     });
   });
 
-
-  
-  // IMAGE EDITING:
-  
+    
   // BANNER WIDTH: // PROBLEM STILL - text added shows outside if banner is smaller.
   $('#bannerwidth').on('keyup mouseup', function() {
       var value = $(this).val();
-       if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 1001 && value != null)) {
+       if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 1001 && value !== null)) {
           $('#bannerwidtherror').css({'visibility' : 'hidden', 'display' : 'none'});
            var canvascontainer = document.getElementById("canvascontainer");
            $(canvascontainer).css('width', value);
@@ -33,7 +30,7 @@ $(function() {
   // BANNER HEIGHT:
   $('#bannerheight').on('keyup mouseup', function() {
       var value = $(this).val();
-      if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 1001 && value != null)) {
+      if ($.isNumeric(value) && Math.floor(value) == +value && (value > 0 && value < 1001 && value !== null)) {
           $('#bannerheighterror').css({'visibility' : 'hidden', 'display' : 'none'});
           var canvascontainer = document.getElementById("canvascontainer");
           $(canvascontainer).css('height', value);
@@ -53,6 +50,17 @@ $(function() {
      }
   });
   
+  // BACKGROUND PREVIEW:
+  $('#pickbgimage').mouseenter(function(){
+     var bgimagepreview = document.getElementById('pickbgimage').value;
+     if (bgimagepreview !== 'none') {
+       var imgstyle = "max-width: 100%; max-height: 100%; background: none; margin: auto;";
+       $('#bgimagepreview').html('<img src="' + bgimagepreview + '" style="' + imgstyle + '">');
+     } else {
+       $('#bgimagepreview').css({ 'display' : 'block' });
+     }
+  });
+  
   // BACKGROUND IMAGE:
   $('#pickbgimage').on('change', function() {
      if (this.value === 'none') {
@@ -61,7 +69,7 @@ $(function() {
        $('#canvascontainer').css({ 'background' : 'url("' + this.value + '")', 'background-size' : '100% 100%' });
      }
   });
-
+  
     // BORDER COLOR:
   $('#pickbordercolor').on('change', function() {
     var pickborderwidth = document.getElementById('pickborderwidth').value;
@@ -76,7 +84,7 @@ $(function() {
   // BORDER WIDTH:
     $('#pickborderwidth').on('keyup mouseup', function() { // works with both keyboard entry or the number field's up/down arrows.
       var value = $(this).val();
-      if ($.isNumeric(value) && Math.floor(value) == +value && (value > -1 && value < 21 && value != null)) {
+      if ($.isNumeric(value) && Math.floor(value) == +value && (value > -1 && value < 21 && value !== null)) {
           $('#borderwidtherror').css({'visibility' : 'hidden', 'display' : 'none'});
       } else {
           $('#borderwidtherror').css({'visibility' : 'visible', 'display' : 'block'});
@@ -101,7 +109,7 @@ $(function() {
     $('#canvascontainer').css({ 'border' : '0 transparent' });
   });
   
-      // FONT COLOR:
+  // FONT COLOR:
   $('#picktextcolor').on('change', function() {
      $('#picktextcolor').css({ 'background' : this.value, 'color' : idealTextColor(this.value) });
   });
@@ -135,19 +143,24 @@ $(function() {
     lastid = 0;
   }
   var newid = lastid + 1;
-  $('#canvascontainer').append($('<div id="' + newid + '"  class="ui-widget-content canvaslayer" style="' + textstyle + '">' + text + '</div>')
-      .draggable({ containment : "#canvascontainer" })
-      .resizable({ 
-        containment: "#canvascontainer", 
-        aspectRatio: false,
-        resize : function(event, ui) {
-        // handle fontsize here
-        //console.log(ui.size); // gives you the current size of the div
-        var size = ui.size;
-        // something like this change the values according to your requirements
-        $(this).css("font-size", (size.width * size.height)/1000 + "px"); 
-        } 
-    }));
+  
+  // RESIZABLE TEXT (commented out because between this and the images, there are too many resize handles and font size can be specified beforehand)
+  // $('#canvascontainer').append($('<div id="' + newid + '"  class="ui-widget-content canvaslayer" style="' + textstyle + '">' + text + '</div>')
+  //     .draggable({ containment : "#canvascontainer" })
+  //     .resizable({ 
+  //       containment: "#canvascontainer", 
+  //       handles: "nw, ne, sw, se",
+  //       resize : function(event, ui) {
+  //       // handle fontsize here
+  //       //console.log(ui.size); // gives you the current size of the div
+  //       var size = ui.size;
+  //       // something like this change the values according to your requirements
+  //       $(this).css("font-size", (size.width * size.height)/1000 + "px"); 
+  //       } 
+  //   }));
+  
+    $('#canvascontainer').append($('<div id="' + newid + '"  class="ui-widget-content canvaslayer" style="' + textstyle + '">' + text + '</div>')
+      .draggable({ containment : "#canvascontainer" }));
   });
 
     
@@ -173,45 +186,101 @@ $(function() {
       }
   });
   
+  // IMAGE PREVIEW:
+  $('#pickimage option').hover(function(){
+    var imagepreview = document.getElementById('pickimage').value;
+    if (imagepreview !== 'none') {
+      var imgstyle = "max-width: 100%; max-height: 100%; background: none; margin: auto;";
+      $('#imagepreview').html('<img src="' + imagepreview + '" style="' + imgstyle + '">');
+    } else {
+      $('#imagepreview').css({ 'display' : 'block' });
+    }
+  });
+
   // ADD IMAGE:
   $('#imageadd').on('click', function() {
    var pickimage = document.getElementById('pickimage').value;
    if (pickimage !== 'none') {
       var canvascontainer = document.getElementById("canvascontainer");
-      var imgstyle = "max-width: 90%; max-height: 90%; background: none;";
+      var imgstyle = "max-width: 100%; max-height: 100%; background: none;";
       var lastid = parseInt($('#canvascontainer div').last().attr('id'));
       if (!lastid) {
         lastid = 0;
       }
       var newid = lastid + 1;
     $('#canvascontainer').append($('<div id="' + newid + '" class="canvaslayer picture"><img class="ui-widget-content" src="' + pickimage + '" style="' + imgstyle + '"></div>')
-        .draggable({ containment : "#canvascontainer" })
+        .draggable({ containment : "body" })
         .resizable({ 
-          containment : "#canvascontainer",
+          //containment : "#maineditpane",
+          handles: "nw, ne, sw, se",
           aspectRatio: false
         })
       );
    }
   });
   
+  // TOGGLE RESIZE HANDLES:
+  $('#imagehandles').on('change', function() {
+    if (document.getElementById('imagehandles').value === 'no') {
+      $(".ui-resizable-handle").hide();
+    } else {
+      $(".ui-resizable-handle").show();
+    }
+    
+  })
+  
   // UNDO ONE BY ONE:
   $('#undo').on('click', function() {
     if ($('#canvascontainer').find('.canvaslayer').length) {
       canvascontainer.removeChild(canvascontainer.lastChild);
+      $('#savediv').empty();
     } 
   });
 
   // UNDO ALL:
   $('#clear').on('click', function() {
-      //$('#previewImage').empty();
-      //$('#textcount').empty();
       document.getElementById('canvascontainer').innerHTML = '';
       $('#canvascontainer').css({ 'border' : '0 transparent', 'background' : '' });
-      //canvasnumber = 2;
+      $('#savediv').empty();
   });
+  
+  // SAVE IMAGE:
+    $("#save").click(function() { 
+      $('#savediv').empty();
+      // is there a background image?
+      var bg = '';
+      if ($('#canvascontainer').css('background-image') !== 'none') {
+        var sub = $('#canvascontainer').css('background-image');
+        // is it the default background?
+        if (sub.substr(sub.length - 14) === 'canvasbg.gif")') {
+          bg = '';
+        } else {
+          bg = sub;
+        }
+      } else {
+        bg = $('#canvascontainer').css('background-color');
+      }
+      $(".ui-resizable-handle").hide();
+        html2canvas($("#canvascontainer"), {
+            background: bg,
+            proxy: 'https://cdn.hyperdev.com',
+            logging: true,
+            allowTaint: true,
+            onrendered: function(canvas) {
+                theCanvas = canvas;
+                $('#savediv').append('<h3>Your Image:</h3>')
+                $('#savediv').append(canvas);
+
+                // Convert and download as image 
+                // Canvas2Image.saveAsPNG(canvas); 
+                // $("#img-out").append(canvas);
+                // Clean up 
+                //document.body.removeChild(canvas);
+            }
+        });
+    });
         
   // SUPPORTING FUNCTIONS: 
-
 
   // GET CONTRASTING TEXT COLOR FOR BACKGROUNDS:
   function idealTextColor(bgColor) {
