@@ -66,10 +66,24 @@
                   <div class="panel-body">
                     Background Color: <select id="pickbgcolor"></select>
                     <div style="height: 10px;"></div>
+                    <div id="bgimagepreview"></div>
+                    <div style="height: 10px;"></div>
                     Background Image: <select id="pickbgimage">
                       <option value="none">None</option>
                       <option value="https://cdn.hyperdev.com/f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg">
-                       f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg</option>
+                        f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FS3XBRRS2D9.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FS3XBRRS2D9.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FO4DWC2WG2U.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FO4DWC2WG2U.jpg</option></option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FIUVI2VVDXJ.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FIUVI2VVDXJ.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FQMA508CSJ4.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FQMA508CSJ4.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FSQY05ME36U.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FSQY05ME36U.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FCHSQY94U6T.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FCHSQY94U6T.jpg</option>
                     </select>
         
                   </div>
@@ -181,13 +195,32 @@
                 </div>
                 <div id="collapse5" class="panel-collapse collapse">
                   <div class="panel-body">
+                  <div id="imagepreview"></div>
+                  <div style="height: 10px;"></div>
                   Select Image: <select id="pickimage">
                       <option value="none">None</option>
                       <option value="https://cdn.hyperdev.com/f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg">
-                       f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg</option>
+                        f14e33fd-c8e8-4b03-87c3-79a0da8b287a%2FDHK577B552.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FS3XBRRS2D9.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FS3XBRRS2D9.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FO4DWC2WG2U.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FO4DWC2WG2U.jpg</option></option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FIUVI2VVDXJ.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FIUVI2VVDXJ.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FQMA508CSJ4.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FQMA508CSJ4.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FSQY05ME36U.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FSQY05ME36U.jpg</option>
+                      <option value="https://cdn.hyperdev.com/3971052c-4afb-4cf1-af63-4f808be90f90%2FCHSQY94U6T.jpg">
+                        3971052c-4afb-4cf1-af63-4f808be90f90%2FCHSQY94U6T.jpg</option>
                     </select>
                     <div style="height: 10px;"></div>
-                    <button id="imageadd">ADD IMAGE</button>           
+                    <button id="imageadd">ADD IMAGE</button>
+                    <div style="height: 15px;"></div>
+                    Show Resize Handles: <select id="imagehandles">
+                      <option value="yes">YES</option>
+                      <option value="no">NO</option>
+                    </select>          
                   
 <!-- 
 <div style="height: 10px;"></div>
@@ -205,6 +238,9 @@ Upload Image: <input type="file" style="display: none;">
               <div id="canvascontainer">
       
               </div>
+              <div id="savediv">
+                
+              </div>
             </p>
           </div>
         </div>
@@ -219,6 +255,8 @@ Upload Image: <input type="file" style="display: none;">
      <!--    <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="/client.js"></script>
   </body>
+  <div class="preloadedImages"></div>
 </html>
