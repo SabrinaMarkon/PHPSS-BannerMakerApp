@@ -1,27 +1,15 @@
-Welcome to the HyperDev BETA
-============================
+PHPSS Online Banner Maker Application 
+-------------------------------------
 
-Click `"Show"` in the header to see your app live. Updates to your code will instantly deploy and update live.
+- This app's github https://github.com/SabrinaMarkon/PHPSS-BannerMakerApp
 
-HyperDev is a developer playground that lets you code a real web-app without the slow setup and deployment steps. 
+- Example URL: https://love-shear.gomix.me/
 
-[About HyperDev](https://hyperdev.com/about)
+- created to be a feature of a larger Laravel website and that repo has more features than this starter one: 
 
+github: https://github.com/SabrinaMarkon/PHPSS-BannerMakerSite-Laravel-5
 
-Your Project
-------------
+example live site: http://sadiesbannercreator.com
 
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env`
-
-On the front-end,
-- edit `client.js`, `style.css` and `index.html`
-- drag in `assets`, like images or music, to add them to your project
-
-
-Made by Fog Creek
------------------
-
-\ ゜o゜)ノ
+Sabrina Markon PHPSiteScripts.com
+phpsitescripts@outlook.com
