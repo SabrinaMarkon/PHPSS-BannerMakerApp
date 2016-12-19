@@ -200,7 +200,9 @@ $(function() {
    if (pickimage !== 'none') {
       var canvascontainer = document.getElementById("canvascontainer");
       var imgstyle = "max-width: 100%; max-height: 100%; background: none;";
+      
       var newid = $("#canvascontainer > div").length + 1;
+      
     $('#canvascontainer').append($('<div id="' + newid + '" class="canvaslayer picture"><img class="ui-widget-content" src="' + pickimage + '" style="' + imgstyle + '"></div>')
         .draggable({ containment : "body" })
         .resizable({ 
@@ -227,6 +229,7 @@ $(function() {
     if ($('#canvascontainer').find('.canvaslayer').length) {
       canvascontainer.removeChild(canvascontainer.lastChild);
       $('#savediv').empty();
+      $('#downloadbuttondiv').hide();
     } 
   });
 
@@ -235,6 +238,7 @@ $(function() {
       document.getElementById('canvascontainer').innerHTML = '';
       $('#canvascontainer').css({ 'border' : '0 transparent', 'background' : '' });
       $('#savediv').empty();
+      $('#downloadbuttondiv').hide();
   });
   
   // SAVE IMAGE:
@@ -263,10 +267,20 @@ $(function() {
                 theCanvas = canvas;
                 $('#savediv').append('<h3>Your Image:</h3>')
                 $('#savediv').append(canvas);
+                //Show the download button.
+                $('#downloadbuttondiv').show();
+                //Set hidden field's value to image data (base-64 string)
+                $('#img_val').val(canvas.toDataURL("image/png"));
             }
         });
     });
-        
+    
+    // DOWNLOAD IMAGE:
+    $("#downloadbutton").on('click', function() {
+      document.getElementById("downloadform").submit();
+    });
+    
+    
   // SUPPORTING FUNCTIONS: 
 
   // GET CONTRASTING TEXT COLOR FOR BACKGROUNDS:
